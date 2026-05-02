@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../services/api';
-import { Plus, CheckCircle, Clock, AlertCircle, UserPlus, Calendar } from 'lucide-react';
+import { Plus, UserPlus, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface Task {
