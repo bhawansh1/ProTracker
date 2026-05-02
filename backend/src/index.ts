@@ -13,13 +13,23 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
-// Global CORS and OPTIONS handler
+// Request logger to see if requests are arriving
 app.use((req, res, next) => {
-  cors({
-    origin: '*',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-  })(req, res, next);
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
+// Robust CORS setup
+app.use(cors({
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+  credentials: true,
+  optionsSuccessStatus: 204
+}));
+
+// Health check route
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', time: new Date().toISOString() });
 });
 
 // Routes
