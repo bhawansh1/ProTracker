@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json());
 
 // Handle preflight globally
-app.options('*', cors());
+app.options('(.*)', cors());
 
 // Routes
 app.use('/api/auth', authRoutes);
